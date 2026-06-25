@@ -1,27 +1,18 @@
 const KEY = "traitors-game-state";
 const ADMIN_SECRET = process.env.ADMIN_SECRET || "traitors2024";
 
-async function kvGet(url, token) {
-  const res = await fetch(`${url}/get/${KEY}`, {
-    headers: { Authorization: `Bearer ${token}` },
-  });
-  const data = await res.json();
-  return data.result ?? null;
-}
-
-async function kvSet(url, token, value) {
-  const res = await fetch(`${url}/set/${encodeURIComponent(KEY)}`, {
+async function upstash(url, token, ...args) {
+  const res = await fetch(`${url}/`, {
     method: "POST",
     headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
-    body: JSON.stringify([value]),
+    body: JSON.stringify(args),
   });
-  return res.ok;
+  const data = await res.json();
+  if (data.error) throw new Error(data.error);
+  return data.result;
 }
 
 export default async function handler(req, res) {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
   res.setHeader("Cache-Control", "no-store");
 
   if (req.method === "OPTIONS") return res.status(200).end();
@@ -30,18 +21,18 @@ export default async function handler(req, res) {
   const token = process.env.KV_REST_API_TOKEN;
 
   if (!url || !token) {
-    return res.status(500).json({ error: "KV not configured" });
+    return res.status(500).json({ error: "KV not configured", url: !!url, token: !!token });
   }
 
   if (req.method === "GET") {
-    const value = await kvGet(url, token);
+    const value = await upstash(url, token, "GET", KEY);
     return res.json({ value });
   }
 
   if (req.method === "POST") {
     const { value, secret } = req.body;
     if (secret !== ADMIN_SECRET) return res.status(403).json({ error: "Forbidden" });
-    await kvSet(url, token, value);
+    await upstash(url, token, "SET", KEY, value);
     return res.json({ ok: true });
   }
 
