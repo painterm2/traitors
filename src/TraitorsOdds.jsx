@@ -112,18 +112,18 @@ const printBetSlip = (myBets, bettorName) => {
 // ── Tickers ──────────────────────────────────────────────────────────────────
 
 function Ticker({ items }) {
-  const repeated = [...items, ...items, ...items];
+  const doubled = [...items, ...items];
   return (
     <div style={{ background: "#0a0a0a", borderBottom: "1px solid #222", overflow: "hidden", height: "32px", display: "flex", alignItems: "center" }}>
       <div style={{ flexShrink: 0, background: ACCENT, color: "#000", fontSize: "9px", fontFamily: "Arial, sans-serif", fontWeight: "800", letterSpacing: "2px", padding: "0 12px", height: "100%", display: "flex", alignItems: "center" }}>BREAKING</div>
       <div style={{ overflow: "hidden", flex: 1 }}>
-        <div style={{ display: "flex", whiteSpace: "nowrap", animation: "ticker-scroll 20s linear infinite" }}>
-          {repeated.map((item, i) => (
+        <div style={{ display: "flex", whiteSpace: "nowrap", animation: "news-scroll 30s linear infinite" }}>
+          {doubled.map((item, i) => (
             <span key={i} style={{ display: "inline-block", fontSize: "11px", fontFamily: "Arial, sans-serif", color: "#bbb", paddingRight: "80px" }}>{item.text}</span>
           ))}
         </div>
       </div>
-      <style>{`@keyframes ticker-scroll{0%{transform:translateX(0)}100%{transform:translateX(-33.333%)}}`}</style>
+      <style>{`@keyframes news-scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}`}</style>
     </div>
   );
 }
@@ -134,8 +134,9 @@ function OddsHighlightTicker({ odds, eliminated }) {
   return (
     <div style={{ background: "#111", borderBottom: "1px solid #222", overflow: "hidden", height: "26px", display: "flex", alignItems: "center" }}>
       <div style={{ flexShrink: 0, padding: "0 12px", fontSize: "9px", fontFamily: "Arial, sans-serif", fontWeight: "700", color: "#444", letterSpacing: "2px" }}>LIVE</div>
+      <style>{`@keyframes odds-scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}`}</style>
       <div style={{ overflow: "hidden", flex: 1 }}>
-        <div key={sorted.map(n => `${n}${odds[n]}`).join()} style={{ display: "flex", whiteSpace: "nowrap", animation: "ticker-scroll 28s linear infinite" }}>
+        <div key={sorted.map(n => `${n}${odds[n]}`).join()} style={{ display: "flex", whiteSpace: "nowrap", animation: "odds-scroll 20s linear infinite" }}>
           {[...sorted, ...sorted].map((name, i) => {
             const american = pctToAmerican(odds[name]);
             const pos = parseFloat(american) >= 0;
