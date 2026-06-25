@@ -12,6 +12,15 @@ const INITIAL_TICKER = [
   { id: 1, text: "🔪 MURDER — Lucy was found dead in the castle last night" },
   { id: 2, text: "🚪 BANISHED — Michael and Kim were voted out by the Faithfuls yesterday" },
   { id: 3, text: "📈 ODDS SHIFT — Alex's Traitor odds have risen sharply following last night's events" },
+  { id: 4, text: "⚽ WORLD CUP 2026 — USA advances to Round of 16 after 2-1 win over Portugal at MetLife Stadium" },
+  { id: 5, text: "⚽ WORLD CUP 2026 — Brazil tops Group C with a dominant 3-0 performance vs. Serbia" },
+  { id: 6, text: "⚽ WORLD CUP 2026 — France and Argentina set for blockbuster Round of 16 clash Friday" },
+  { id: 7, text: "⚽ WORLD CUP 2026 — England's Bellingham scores brace in 2-0 Group D win over Iran" },
+  { id: 8, text: "🏀 NBA FINALS — Game 5 tonight: OKC Thunder lead series 3-1 over Boston Celtics" },
+  { id: 9, text: "🏀 NBA — Shai Gilgeous-Alexander puts up 38 pts in must-watch Game 4 performance" },
+  { id: 10, text: "🎾 WIMBLEDON — Qualifying begins next week as grass court season reaches its peak" },
+  { id: 11, text: "🏎️ F1 — Canadian Grand Prix results: Verstappen wins, Norris P2, Russell P3" },
+  { id: 12, text: "⚾ MLB — Yankees vs Dodgers rivalry renewed tonight at Yankee Stadium, first pitch 7pm ET" },
 ];
 
 const defaultState = {
