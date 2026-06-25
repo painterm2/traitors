@@ -1,7 +1,22 @@
-import { kv } from "@vercel/kv";
-
 const KEY = "traitors-game-state";
 const ADMIN_SECRET = process.env.ADMIN_SECRET || "traitors2024";
+
+async function kvGet(url, token) {
+  const res = await fetch(`${url}/get/${KEY}`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  const data = await res.json();
+  return data.result ?? null;
+}
+
+async function kvSet(url, token, value) {
+  const res = await fetch(`${url}/set/${KEY}`, {
+    method: "POST",
+    headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+    body: JSON.stringify({ value }),
+  });
+  return res.ok;
+}
 
 export default async function handler(req, res) {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -10,15 +25,22 @@ export default async function handler(req, res) {
 
   if (req.method === "OPTIONS") return res.status(200).end();
 
+  const url = process.env.KV_REST_API_URL;
+  const token = process.env.KV_REST_API_TOKEN;
+
+  if (!url || !token) {
+    return res.status(500).json({ error: "KV not configured" });
+  }
+
   if (req.method === "GET") {
-    const value = await kv.get(KEY);
+    const value = await kvGet(url, token);
     return res.json({ value });
   }
 
   if (req.method === "POST") {
     const { value, secret } = req.body;
     if (secret !== ADMIN_SECRET) return res.status(403).json({ error: "Forbidden" });
-    await kv.set(KEY, value);
+    await kvSet(url, token, value);
     return res.json({ ok: true });
   }
 
