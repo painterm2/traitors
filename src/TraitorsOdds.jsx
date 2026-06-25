@@ -229,11 +229,12 @@ export default function TraitorsOdds() {
     setSyncStatus("saving");
     justSaved.current = true;
     try {
-      await fetch("/api/state", {
+      const res = await fetch("/api/state", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ value: JSON.stringify(newState), secret: ADMIN_SECRET }),
       });
+      if (!res.ok) throw new Error(res.status);
       setSyncStatus("saved");
       setTimeout(() => setSyncStatus("synced"), 1500);
     } catch {
