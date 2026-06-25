@@ -201,6 +201,9 @@ export default function TraitorsOdds() {
       if (value) {
         const parsed = typeof value === "string" ? JSON.parse(value) : value;
         if (!parsed.ticker) parsed.ticker = INITIAL_TICKER;
+        if (!parsed.eliminated) parsed.eliminated = [];
+        if (!parsed.revealed) parsed.revealed = {};
+        if (!parsed.odds) parsed.odds = defaultState.odds;
         setGameState(parsed);
       } else {
         setGameState(defaultState);
