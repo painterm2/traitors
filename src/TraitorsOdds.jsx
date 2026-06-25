@@ -93,8 +93,8 @@ const printBetSlip = (myBets, bettorName) => {
   </style></head><body>
   <div class="slip">
     <div class="slip-header">
-      <div class="label">THE TRAITORS · OFFICIAL</div>
-      <div class="title">BET SLIP</div>
+      <div class="label">THE TRAITORS · FAKE · NOT REAL</div>
+      <div class="title">FAKE BET SLIP</div>
       <div class="bettor">${bettorName}</div>
       <div class="date">${new Date().toLocaleDateString("en-US",{month:"long",day:"numeric",year:"numeric"})}</div>
     </div>
@@ -102,7 +102,7 @@ const printBetSlip = (myBets, bettorName) => {
     <tbody>${rows}</tbody></table>
     <div class="totals-row"><span class="tl">TOTAL STAKE</span><span class="tv">${total} RSUs</span></div>
     <div class="totals-row"><span class="tl">TOTAL PAYOUT</span><span class="tv">${totalPayout} RSUs</span></div>
-    <div class="footer">FOR ENTERTAINMENT PURPOSES ONLY · NOT REAL CURRENCY</div>
+    <div class="footer">⚠ FAKE BET — FOR ENTERTAINMENT ONLY — NOT REAL MONEY — NOT REAL GAMBLING ⚠</div>
   </div>
   <script>window.onload=()=>window.print()</script>
   </body></html>`);
@@ -275,7 +275,7 @@ function BetSlip({ selections, odds, onRemove, onClear, bettorName, onChangeName
         <div onClick={() => setOpen(o => !o)} style={{ padding: "14px 20px", display: "flex", alignItems: "center", justifyContent: "space-between", cursor: "pointer", userSelect: "none" }}>
           <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
             <div style={{ background: count > 0 ? ACCENT : "#333", borderRadius: "50%", width: "22px", height: "22px", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "11px", fontWeight: "800", color: "#000", fontFamily: "Arial, sans-serif", flexShrink: 0 }}>{count}</div>
-            <span style={{ fontSize: "13px", fontWeight: "700", color: "#f0ead6", fontFamily: "Arial, sans-serif", letterSpacing: "1px" }}>{parlay ? "PARLAY SLIP" : "BET SLIP"}</span>
+            <span style={{ fontSize: "13px", fontWeight: "700", color: "#f0ead6", fontFamily: "Arial, sans-serif", letterSpacing: "1px" }}>{parlay ? "FAKE PARLAY SLIP" : "FAKE BET SLIP"}</span>
             {parlay && parlayAmerican && <span style={{ fontSize: "11px", fontWeight: "800", color: ACCENT, fontFamily: "Arial, sans-serif" }}>{parlayAmerican}</span>}
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
@@ -403,7 +403,7 @@ function BetSlip({ selections, odds, onRemove, onClear, bettorName, onChangeName
                   disabled={submitting || !bettorName.trim() || !amt}
                   style={{ width: "100%", background: submitting || !bettorName.trim() || !amt ? "#2a2a2a" : GREEN, border: "none", borderRadius: "8px", color: submitting || !bettorName.trim() || !amt ? "#555" : "#000", fontSize: "15px", fontWeight: "800", fontFamily: "Arial, sans-serif", letterSpacing: "1px", padding: "14px", cursor: submitting || !bettorName.trim() || !amt ? "default" : "pointer" }}
                 >
-                  {submitting ? "PLACING..." : parlay ? `PLACE PARLAY (${parlayAmerican})` : `PLACE ${count > 1 ? `${count} BETS` : "BET"}`}
+                  {submitting ? "PLACING FAKE BET..." : parlay ? `PLACE FAKE PARLAY (${parlayAmerican})` : `PLACE FAKE ${count > 1 ? `${count} BETS` : "BET"}`}
                 </button>
               </>
             )}
@@ -424,7 +424,7 @@ function BetsBoard({ bets, bettorName, odds, onClearBets, admin }) {
     <div>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "14px" }}>
         <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-          <div style={{ fontSize: "12px", fontWeight: "700", color: "#f0ead6", fontFamily: "Arial, sans-serif", letterSpacing: "1px" }}>ALL BETS</div>
+          <div style={{ fontSize: "12px", fontWeight: "700", color: "#f0ead6", fontFamily: "Arial, sans-serif", letterSpacing: "1px" }}>ALL FAKE BETS</div>
           {bets.length > 0 && <div style={{ background: "#2a2a2a", borderRadius: "20px", padding: "2px 8px", fontSize: "11px", color: "#888", fontFamily: "Arial, sans-serif" }}>{bets.length}</div>}
         </div>
         <div style={{ display: "flex", gap: "8px" }}>
@@ -621,15 +621,19 @@ export default function TraitorsOdds() {
 
   return (
     <div style={{ minHeight: "100vh", background: "#0d0d0d", fontFamily: "Arial, sans-serif", color: "#f0ead6", paddingBottom: "120px" }}>
+      {/* Fake disclaimer banner */}
+      <div style={{ background: "#1a0a0a", borderBottom: "1px solid #3a1a1a", padding: "5px 16px", textAlign: "center" }}>
+        <span style={{ fontSize: "10px", fontFamily: "Arial, sans-serif", color: "#884444", letterSpacing: "2px", fontWeight: "700" }}>⚠ FAKE BETTING — FOR ENTERTAINMENT PURPOSES ONLY — NO REAL MONEY — NO REAL GAMBLING ⚠</span>
+      </div>
       {ticker && ticker.length > 0 && <Ticker items={ticker} />}
       <OddsHighlightTicker odds={odds} eliminated={eliminated} />
 
       {/* Header */}
       <div style={{ background: "#111", borderBottom: "1px solid #222", padding: "20px 20px 16px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
         <div>
-          <div style={{ fontSize: "10px", letterSpacing: "4px", color: ACCENT, fontWeight: "700", marginBottom: "4px" }}>THE TRAITORS</div>
-          <div style={{ fontSize: "22px", fontWeight: "800", letterSpacing: "1px", fontFamily: "Georgia, serif" }}>BETTING BOARD</div>
-          <div style={{ fontSize: "11px", color: "#555", marginTop: "2px" }}>Who among them is a Traitor?</div>
+          <div style={{ fontSize: "10px", letterSpacing: "4px", color: ACCENT, fontWeight: "700", marginBottom: "4px" }}>THE TRAITORS · FAKE</div>
+          <div style={{ fontSize: "22px", fontWeight: "800", letterSpacing: "1px", fontFamily: "Georgia, serif" }}>FAKE BETTING BOARD</div>
+          <div style={{ fontSize: "11px", color: "#555", marginTop: "2px" }}>For entertainment only · Not real money · Not real gambling</div>
         </div>
         <div style={{ textAlign: "right" }}>
           <div style={{ display: "inline-flex", alignItems: "center", gap: "5px", background: "#1a1a1a", border: "1px solid #2a2a2a", borderRadius: "20px", padding: "4px 10px" }}>
@@ -644,7 +648,7 @@ export default function TraitorsOdds() {
 
         {/* Section label */}
         <div style={{ fontSize: "11px", fontWeight: "700", color: "#555", letterSpacing: "2px", marginBottom: "10px", padding: "0 4px" }}>
-          TRAITOR ODDS · TAP TO BET
+          FAKE TRAITOR ODDS · TAP TO FAKE BET
         </div>
 
         {/* Player cards */}
