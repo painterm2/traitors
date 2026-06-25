@@ -117,7 +117,7 @@ function Ticker({ items }) {
     <div style={{ background: "#0a0a0a", borderBottom: "1px solid #222", overflow: "hidden", height: "32px", display: "flex", alignItems: "center" }}>
       <div style={{ flexShrink: 0, background: ACCENT, color: "#000", fontSize: "9px", fontFamily: "Arial, sans-serif", fontWeight: "800", letterSpacing: "2px", padding: "0 12px", height: "100%", display: "flex", alignItems: "center" }}>BREAKING</div>
       <div style={{ overflow: "hidden", flex: 1 }}>
-        <div style={{ display: "flex", whiteSpace: "nowrap", animation: "ticker-scroll 40s linear infinite" }}>
+        <div style={{ display: "flex", whiteSpace: "nowrap", animation: "ticker-scroll 20s linear infinite" }}>
           {repeated.map((item, i) => (
             <span key={i} style={{ display: "inline-block", fontSize: "11px", fontFamily: "Arial, sans-serif", color: "#bbb", paddingRight: "80px" }}>{item.text}</span>
           ))}
