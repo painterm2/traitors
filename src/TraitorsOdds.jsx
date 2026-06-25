@@ -93,7 +93,7 @@ const printBetSlip = (myBets, bettorName) => {
   </style></head><body>
   <div class="slip">
     <div class="slip-header">
-      <div class="label">THE TRAITORS · FOR ENTERTAINMENT ONLY</div>
+      <div class="label">THE TRAITORS</div>
       <div class="title">BET SLIP</div>
       <div class="bettor">${bettorName}</div>
       <div class="date">${new Date().toLocaleDateString("en-US",{month:"long",day:"numeric",year:"numeric"})}</div>
@@ -621,9 +621,9 @@ export default function TraitorsOdds() {
 
   return (
     <div style={{ minHeight: "100vh", background: "#0d0d0d", fontFamily: "Arial, sans-serif", color: "#f0ead6", paddingBottom: "120px" }}>
-      {/* Fake disclaimer banner */}
-      <div style={{ background: "#111", borderBottom: "1px solid #1e1e1e", padding: "4px 16px", textAlign: "center" }}>
-        <span style={{ fontSize: "10px", fontFamily: "Arial, sans-serif", color: "#555", letterSpacing: "1px" }}>For entertainment only · Bets are fake · RSUs are not real currency</span>
+      {/* Disclaimer banner */}
+      <div style={{ background: "#1c1000", borderBottom: "2px solid #e8b84b44", padding: "7px 16px", textAlign: "center" }}>
+        <span style={{ fontSize: "11px", fontFamily: "Arial, sans-serif", color: ACCENT, letterSpacing: "2px", fontWeight: "700" }}>⚠ FOR ENTERTAINMENT ONLY — BETS & RSUs ARE NOT REAL</span>
       </div>
       {ticker && ticker.length > 0 && <Ticker items={ticker} />}
       <OddsHighlightTicker odds={odds} eliminated={eliminated} />
