@@ -195,10 +195,10 @@ export default function TraitorsOdds() {
 
   const loadFromStorage = async (isInitial = false) => {
     try {
-      const result = await window.storage.get(STORAGE_KEY, true);
-      if (result && result.value) {
-        const parsed = JSON.parse(result.value);
-        // Back-fill ticker if old saved state lacks it
+      const res = await fetch("/api/state");
+      const { value } = await res.json();
+      if (value) {
+        const parsed = typeof value === "string" ? JSON.parse(value) : value;
         if (!parsed.ticker) parsed.ticker = INITIAL_TICKER;
         setGameState(parsed);
       } else {
@@ -224,7 +224,11 @@ export default function TraitorsOdds() {
     setSyncStatus("saving");
     justSaved.current = true;
     try {
-      await window.storage.set(STORAGE_KEY, JSON.stringify(newState), true);
+      await fetch("/api/state", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ value: JSON.stringify(newState), secret: ADMIN_SECRET }),
+      });
       setSyncStatus("saved");
       setTimeout(() => setSyncStatus("synced"), 1500);
     } catch {
