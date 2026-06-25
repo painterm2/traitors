@@ -10,10 +10,10 @@ async function kvGet(url, token) {
 }
 
 async function kvSet(url, token, value) {
-  const res = await fetch(`${url}/set/${KEY}`, {
+  const res = await fetch(`${url}/set/${encodeURIComponent(KEY)}`, {
     method: "POST",
     headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
-    body: JSON.stringify({ value }),
+    body: JSON.stringify([value]),
   });
   return res.ok;
 }
