@@ -196,6 +196,7 @@ export default function TraitorsOdds() {
   const loadFromStorage = async (isInitial = false) => {
     try {
       const res = await fetch("/api/state");
+      if (!res.ok) throw new Error(res.status);
       const { value } = await res.json();
       if (value) {
         const parsed = typeof value === "string" ? JSON.parse(value) : value;
@@ -206,7 +207,8 @@ export default function TraitorsOdds() {
       }
       if (isInitial) setSyncStatus("synced");
     } catch (e) {
-      if (isInitial) setGameState(defaultState);
+      setGameState(prev => prev ?? defaultState);
+      if (isInitial) setSyncStatus("error");
     }
   };
 
