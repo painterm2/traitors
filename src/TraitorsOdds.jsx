@@ -126,7 +126,7 @@ function OddsHighlightTicker({ odds, eliminated }) {
         ODDS
       </div>
       <div style={{ overflow: "hidden", flex: 1 }}>
-        <div style={{
+        <div key={sorted.map(n => `${n}${odds[n]}`).join()} style={{
           display: "flex",
           whiteSpace: "nowrap",
           animation: "ticker-scroll 30s linear infinite",
