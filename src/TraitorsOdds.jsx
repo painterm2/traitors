@@ -209,7 +209,13 @@ export default function TraitorsOdds() {
       const { value } = await res.json();
       if (value) {
         const parsed = typeof value === "string" ? JSON.parse(value) : value;
-        if (!parsed.ticker) parsed.ticker = INITIAL_TICKER;
+        if (!parsed.ticker) {
+          parsed.ticker = INITIAL_TICKER;
+        } else {
+          const existingIds = new Set(parsed.ticker.map(t => t.id));
+          const newItems = INITIAL_TICKER.filter(t => !existingIds.has(t.id));
+          if (newItems.length) parsed.ticker = [...parsed.ticker, ...newItems];
+        }
         if (!parsed.eliminated) parsed.eliminated = [];
         if (!parsed.revealed) parsed.revealed = {};
         if (!parsed.odds) parsed.odds = defaultState.odds;
