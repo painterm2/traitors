@@ -275,7 +275,7 @@ function BetSlip({ selections, odds, onRemove, onClear, bettorName, onChangeName
         <div onClick={() => setOpen(o => !o)} style={{ padding: "14px 20px", display: "flex", alignItems: "center", justifyContent: "space-between", cursor: "pointer", userSelect: "none" }}>
           <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
             <div style={{ background: count > 0 ? ACCENT : "#333", borderRadius: "50%", width: "22px", height: "22px", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "11px", fontWeight: "800", color: "#000", fontFamily: "Arial, sans-serif", flexShrink: 0 }}>{count}</div>
-            <span style={{ fontSize: "13px", fontWeight: "700", color: "#f0ead6", fontFamily: "Arial, sans-serif", letterSpacing: "1px" }}>{parlay ? "PARLAY SLIP" : "BET SLIP"}</span>
+            <span style={{ fontSize: "13px", fontWeight: "700", color: "#f0ead6", fontFamily: "Arial, sans-serif", letterSpacing: "1px" }}>{parlay ? "FAKE PARLAY SLIP" : "FAKE BET SLIP"}</span>
             {parlay && parlayAmerican && <span style={{ fontSize: "11px", fontWeight: "800", color: ACCENT, fontFamily: "Arial, sans-serif" }}>{parlayAmerican}</span>}
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
