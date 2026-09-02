@@ -15,7 +15,7 @@ async function upstash(url, token, ...args) {
 
 export default async function handler(req, res) {
   res.setHeader("Cache-Control", "no-store");
-
+  try {
   const url = process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL;
   const token = process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN;
   if (!url || !token) return res.status(500).json({ error: "KV not configured" });
@@ -56,4 +56,7 @@ export default async function handler(req, res) {
   }
 
   res.status(405).end();
+  } catch (e) {
+    res.status(500).json({ error: e.message || "Internal server error" });
+  }
 }
