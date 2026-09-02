@@ -70,6 +70,7 @@ export default function HulaHoop() {
   const [stake, setStake] = useState("");
   const [slipOpen, setSlipOpen] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
   const [syncStatus, setSyncStatus] = useState("loading");
   const justPlaced = useRef(false);
   const admin = isAdmin();
@@ -110,13 +111,14 @@ export default function HulaHoop() {
     const amt = parseFloat(stake);
     if (!bettorName.trim() || !amt || !selections.length) return;
     setSubmitting(true);
+    setSubmitError("");
     try {
       let updated = [...competitors];
       for (const id of selections) {
         updated = shiftOdds(updated, id);
         const c = updated.find(x => x.id === id);
         const oddsMap = Object.fromEntries(updated.map(x => [x.id, x.odds]));
-        await fetch("/api/hoop-bets", {
+        const res = await fetch("/api/hoop-bets", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -124,6 +126,10 @@ export default function HulaHoop() {
             odds: oddsMap,
           }),
         });
+        if (!res.ok) {
+          const err = await res.json().catch(() => ({}));
+          throw new Error(err.error || `Server error ${res.status}`);
+        }
       }
       setCompetitors(updated);
       setSelections([]);
@@ -131,7 +137,9 @@ export default function HulaHoop() {
       setSlipOpen(false);
       justPlaced.current = true;
       setTimeout(() => load(false), 400);
-    } catch {}
+    } catch (e) {
+      setSubmitError(e.message || "Failed to place bet — try again");
+    }
     setSubmitting(false);
   };
 
@@ -175,8 +183,8 @@ export default function HulaHoop() {
         <div style={{ position: "absolute", width: 200, height: 200, borderRadius: "50%", border: "28px solid rgba(245,166,35,0.05)", bottom: -90, left: -30, pointerEvents: "none" }} />
         <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", position: "relative" }}>
           <div>
-            <div style={{ fontSize: "9px", letterSpacing: "4px", color: ACCENT, fontWeight: "700", marginBottom: "3px" }}>THE GREAT FY27</div>
-            <div style={{ fontSize: "26px", fontWeight: "800", letterSpacing: "1px", lineHeight: 1.1 }}>HULA HOOP<br /><span style={{ color: ACCENT }}>CHALLENGE</span></div>
+            <div style={{ fontSize: "9px", letterSpacing: "4px", color: ACCENT, fontWeight: "700", marginBottom: "3px" }}>FY27</div>
+            <div style={{ fontSize: "26px", fontWeight: "800", letterSpacing: "1px", lineHeight: 1.1 }}>HULA HOOP<br /><span style={{ color: ACCENT }}>COMPETITION</span></div>
             <div style={{ display: "flex", gap: "14px", marginTop: "8px", flexWrap: "wrap" }}>
               <span style={{ fontSize: "11px", color: "#6b90b8" }}>📅 September 3</span>
               <span style={{ fontSize: "11px", color: "#6b90b8" }}>🌀 16 competitors · 4 divisions</span>
@@ -374,6 +382,11 @@ export default function HulaHoop() {
                       </div>
                     )}
 
+                    {submitError && (
+                      <div style={{ background: "rgba(220,50,50,0.1)", border: "1px solid rgba(220,50,50,0.3)", borderRadius: "7px", padding: "8px 12px", marginBottom: "9px", fontSize: "12px", color: "#f87171" }}>
+                        ⚠ {submitError}
+                      </div>
+                    )}
                     <button
                       onClick={handleSubmitBets}
                       disabled={submitting || !bettorName.trim() || !amt}
