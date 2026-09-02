@@ -22,22 +22,22 @@ const DIVISIONS = [
 const DIV_COLORS = { train: ACCENT, deploy: AMBER, analyze: WC_COLOR, test: GREEN };
 
 const BASE_COMPETITORS = [
-  { id: "ALLY", div: "train",   seed: 1,    name: "Ally",            odds: -140 },
-  { id: "TRWC", div: "train",   seed: "WC", name: "Train Wildcard",  odds: 1800 },
-  { id: "TR2",  div: "train",   seed: 2,    name: "TR2",             odds: 650  },
-  { id: "TR3",  div: "train",   seed: 3,    name: "TR3",             odds: 1100 },
-  { id: "DP1",  div: "deploy",  seed: 1,    name: "DP1",             odds: 280  },
-  { id: "DPWC", div: "deploy",  seed: "WC", name: "Deploy Wildcard", odds: 2000 },
-  { id: "DP2",  div: "deploy",  seed: 2,    name: "DP2",             odds: 700  },
-  { id: "DP3",  div: "deploy",  seed: 3,    name: "DP3",             odds: 1200 },
-  { id: "AN1",  div: "analyze", seed: 1,    name: "AN1",             odds: 300  },
-  { id: "ANWC", div: "analyze", seed: "WC", name: "Analyze Wildcard",odds: 2200 },
-  { id: "AN2",  div: "analyze", seed: 2,    name: "AN2",             odds: 750  },
-  { id: "AN3",  div: "analyze", seed: 3,    name: "AN3",             odds: 1300 },
-  { id: "TS1",  div: "test",    seed: 1,    name: "TS1",             odds: 260  },
-  { id: "TSWC", div: "test",    seed: "WC", name: "Test Wildcard",   odds: 1600 },
-  { id: "TS2",  div: "test",    seed: 2,    name: "TS2",             odds: 600  },
-  { id: "TS3",  div: "test",    seed: 3,    name: "TS3",             odds: 1000 },
+  { id: "TR1",  div: "train",   seed: 1,    name: "Michael Painter", odds: 320  },
+  { id: "TRWC", div: "train",   seed: "WC", name: "John P",          odds: 1800 },
+  { id: "TR2",  div: "train",   seed: 2,    name: "Kim",             odds: 650  },
+  { id: "TR3",  div: "train",   seed: 3,    name: "Andrew P",        odds: 1100 },
+  { id: "DP1",  div: "deploy",  seed: 1,    name: "Annie",           odds: 280  },
+  { id: "DPWC", div: "deploy",  seed: "WC", name: "Skyler",          odds: 2000 },
+  { id: "DP2",  div: "deploy",  seed: 2,    name: "Alan",            odds: 700  },
+  { id: "DP3",  div: "deploy",  seed: 3,    name: "Alex B",          odds: 1200 },
+  { id: "AN1",  div: "analyze", seed: 1,    name: "Dean",            odds: 300  },
+  { id: "ALLY", div: "analyze", seed: "WC", name: "Ally",            odds: -140 },
+  { id: "AN2",  div: "analyze", seed: 2,    name: "MK",              odds: 750  },
+  { id: "AN3",  div: "analyze", seed: 3,    name: "Lucy",            odds: 1300 },
+  { id: "TS1",  div: "test",    seed: 1,    name: "Jasmine",         odds: 260  },
+  { id: "TSWC", div: "test",    seed: "WC", name: "Nick",            odds: 1600 },
+  { id: "TS2",  div: "test",    seed: 2,    name: "Nell",            odds: 600  },
+  { id: "TS3",  div: "test",    seed: 3,    name: "Andrew Miller",   odds: 1000 },
 ];
 
 const QUICK_STAKES = [10, 25, 50, 100];
