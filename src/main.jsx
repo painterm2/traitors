@@ -1,6 +1,7 @@
 import { StrictMode, Component } from 'react'
 import { createRoot } from 'react-dom/client'
 import TraitorsOdds from './TraitorsOdds.jsx'
+import HulaHoop from './HulaHoop.jsx'
 
 class ErrorBoundary extends Component {
   constructor(props) { super(props); this.state = { error: null }; }
@@ -18,10 +19,13 @@ class ErrorBoundary extends Component {
   }
 }
 
+const path = window.location.pathname.replace(/\/$/, '');
+const App = path === '/traitors' ? TraitorsOdds : HulaHoop;
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <ErrorBoundary>
-      <TraitorsOdds />
+      <App />
     </ErrorBoundary>
   </StrictMode>,
 )
